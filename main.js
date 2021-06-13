@@ -161,3 +161,155 @@ const inventory = [
     sold: 8,
   },
 ];
+
+/* opd 1 */
+function getTelevisionStock() {
+  let currentStock = 0;
+
+  inventory.forEach(tv => {
+    currentStock += tv.originalStock - tv.sold
+  });
+
+  return currentStock;
+}
+
+function populateStockDiv() {
+  document.getElementById('currentStockBtn').disabled = true;
+
+  const stockDiv = document.getElementById('currentStock');
+  stockDiv.innerHTML += getTelevisionStock();
+}
+
+/* opd 2 */
+function getAllTelevisionTypes() {
+  let televisionTypes = []
+
+  inventory.forEach(tv => {
+    televisionTypes.push(tv.type);
+  });
+
+  return televisionTypes;
+}
+
+function getOutOfStockTelevisions() {
+  let outOfStock = [];
+
+  inventory.forEach(tv => {
+    if ((tv.originalStock - tv.sold) <= 0) {
+      outOfStock.push(tv);
+    }
+  });
+
+  return outOfStock;
+}
+
+function getAmbiLightTelevisions() {
+  let ambiLightTelevisions = [];
+
+  inventory.forEach(tv => {
+    if (tv.options.ambiLight === true) {
+      ambiLightTelevisions.push(tv);
+    }
+  });
+
+  return ambiLightTelevisions;
+}
+
+function sortTelevisionsByPrice() {
+  return inventory.sort((a, b) => a.price - b.price);
+}
+
+/* opd 3 */
+function getProfitGoal() {
+  let profitGoal = 0;
+
+  inventory.forEach(tv => {
+    profitGoal += tv.originalStock * tv.price
+  });
+
+  return profitGoal;
+}
+
+function populateProfitGoalDiv() {
+  document.getElementById('profitGoalBtn').disabled = true;
+
+  const profitGoal = document.getElementById('profitGoal');
+  profitGoal.innerHTML += '€ ' + getProfitGoal();
+}
+
+function getProfitMade() {
+  let profit = 0;
+
+  inventory.forEach(tv => {
+    profit += tv.sold * tv.price
+  });
+
+  return profit;
+}
+
+function populatMadeProfitDiv() {
+  document.getElementById('madeProfitBtn').disabled = true;
+
+  const profitMade = document.getElementById('madeProfit');
+  profitMade.innerHTML += '€ ' + getProfitMade();
+}
+
+/* opd 4 */
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    let highlightedTelevisions = [];
+    const highlightedTelevisionsHtml = document.getElementById('highlightedTelevisions');
+    for (let i = 0; i < 2; i++) {
+      highlightedTelevisions.push(inventory[Math.floor(Math.random() * inventory.length)]);
+    }
+    highlightedTelevisionsHtml.innerHTML = '<ul>' + highlightedTelevisions[0].type + '<ul />';
+    // opd 5d
+    highlightedTelevisionsHtml.innerHTML += '<ul>' +
+      getTvFullName(highlightedTelevisions[1])
+      + '<br />' +
+      getTvPrice(highlightedTelevisions[1])
+      + '<br />' +
+      getScreenSizes(highlightedTelevisions[1].availableSizes)
+      + '</ul>';
+  }
+}
+
+/* opd 5 */
+function getTvFullName(tv) {
+  return tv.brand + ' ' + tv.type + ' - ' + tv.name;
+}
+
+function getTvPrice(tv) {
+  return '€ ' + tv.price + ',-';
+}
+
+function getScreenSizes(sizes) {
+  let output = '';
+
+  sizes.forEach(size => {
+
+    const currentSizeInches = size;
+    const currentSizeCm = size * 2.54;
+    // we only add a seperator to the end of the string if output is not empty
+    output += output ? ' | ' : '';
+    output += currentSizeInches + ' inch (' + currentSizeCm + ' cm)';
+  });
+
+  return output;
+}
+
+function getAllTelevisions(televisions = inventory) {
+  const televisionDiv = document.getElementById('televisions');
+  //clean the html element bofore inserting values
+  televisionDiv.innerHTML = ''
+  televisions.forEach(tv => {
+    televisionDiv.innerHTML +=
+      '<ul>' +
+      getTvFullName(tv)
+      + '<br />' +
+      getTvPrice(tv)
+      + '<br />' +
+      getScreenSizes(tv.availableSizes)
+      + '</ul>';
+  });
+}

@@ -1,0 +1,16 @@
+/* opd 1 */
+#currentStock{
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+}
+
+/* opd 3 */
+#profitGoal{
+    color: rgba(95, 159, 243);
+    font-weight: bold;
+}
+
+#madeProfit{
+    color: rgb(120, 243, 95);
+    font-weight: bold;
+}

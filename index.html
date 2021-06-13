@@ -1,10 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Tech It Easy Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js"></script>
 </head>
+
 <body>
+    <label>Current tv's in stock</label>
+    <div id="currentStock">
+        <!-- here comes the current stock-->
+    </div>
+    <button type="button" id="currentStockBtn" onclick="populateStockDiv(); ">Get current stock</button>
+    <br>
+    <br>
+    <label>Profit goal</label>
+    <div id="profitGoal">
+        <!-- here comes the profit goal-->
+    </div>
+    <button type="button" id="profitGoalBtn" onclick="populateProfitGoalDiv()">Get current stock</button>
+    <br>
+    <br>
+    <label>Proft made</label>
+    <div id="madeProfit">
+        <!-- here comes the made profit-->
+    </div>
+    <button type="button" id="madeProfitBtn" onclick="populatMadeProfitDiv()">Get current profit</button>
+    <br>
+    <br>
+    <h1>Highlighted televisions!!!!</h1>
+    <div id="highlightedTelevisions">
+        <!-- here come the hightlighted tvs-->
+    </div>
+    
+    <h1>Televisions</h1>
+    <button type="button" id="currentStockBtn" onclick="getAllTelevisions(); ">Show all</button>
+    <button type="button" id="currentStockBtn" onclick="getAllTelevisions(sortTelevisionsByPrice()); ">Show all price Ascending</button>
+    <button type="button" id="currentStockBtn" onclick="getAllTelevisions(getAmbiLightTelevisions()); ">Show ambilight only</button>
+    <button type="button" id="currentStockBtn" onclick="getAllTelevisions(getOutOfStockTelevisions()); ">Show OOS televisions</button>
+    <div id="televisions">
+        <!-- here come the wanted tvs-->
+    </div>
+
 
 </body>
+
 </html>
