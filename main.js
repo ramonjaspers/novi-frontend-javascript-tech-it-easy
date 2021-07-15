@@ -166,9 +166,7 @@ const inventory = [
 function getTelevisionStock() {
   let currentStock = 0;
 
-  inventory.forEach(tv => {
-    currentStock += tv.originalStock - tv.sold
-  });
+  inventory.map(tv => currentStock += tv.originalStock - tv.sold);
 
   return currentStock;
 }
@@ -182,37 +180,15 @@ function populateStockDiv() {
 
 /* opd 2 */
 function getAllTelevisionTypes() {
-  let televisionTypes = []
-
-  inventory.forEach(tv => {
-    televisionTypes.push(tv.type);
-  });
-
-  return televisionTypes;
+  return inventory.map(tv => tv.type);
 }
 
 function getOutOfStockTelevisions() {
-  let outOfStock = [];
-
-  inventory.forEach(tv => {
-    if ((tv.originalStock - tv.sold) <= 0) {
-      outOfStock.push(tv);
-    }
-  });
-
-  return outOfStock;
+  return inventory.filter(tv => (tv.originalStock - tv.sold) <= 0);
 }
 
 function getAmbiLightTelevisions() {
-  let ambiLightTelevisions = [];
-
-  inventory.forEach(tv => {
-    if (tv.options.ambiLight === true) {
-      ambiLightTelevisions.push(tv);
-    }
-  });
-
-  return ambiLightTelevisions;
+  return inventory.filter(tv => tv.options.ambiLight === true);
 }
 
 function sortTelevisionsByPrice() {
